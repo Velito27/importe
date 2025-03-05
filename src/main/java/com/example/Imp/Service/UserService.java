@@ -1,6 +1,6 @@
 package com.example.Imp.Service;
 
-import com.example.Imp.Entity.User;
+import com.example.Imp.Entity.UserEntity;
 import com.example.Imp.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +14,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Optional<User> findByUsername(String username) {
+    public Optional<UserEntity> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    public User saveUser(User user) {
+    public UserEntity saveUser(UserEntity user) {
         return userRepository.save(user);
-
     }
+
 }

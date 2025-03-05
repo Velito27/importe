@@ -1,6 +1,6 @@
 package com.example.Imp.Controller;
 
-import com.example.Imp.Entity.User;
+import com.example.Imp.Entity.UserEntity;
 import com.example.Imp.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,24 +24,21 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home(Model model) {
-        // Obtén el nombre del usuario autenticado
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
-        // Busca en la base de datos
-        Optional<User> userOpt = userService.findByUsername(username);
+        Optional<UserEntity> userOpt = userService.findByUsername(username);
         if(userOpt.isPresent()){
             model.addAttribute("user", userOpt.get());
         } else {
-            // Maneja el caso en que el usuario no se encuentre
             model.addAttribute("user", null);
         }
 
-        return "home"; // Vista home.html
+        return "home";
     }
 
     @GetMapping("/login")
     public String login() {
-        return "login"; // Vista login.html
+        return "login";
     }
 }
